@@ -133,7 +133,7 @@
                 <input id="submit_btn" type="submit" class="staticrypt-decrypt-button" value="DECRYPT" />
             </form>
             <script>
-                ///this tiny little script is added by Jelle Wilbrink. My personal addition.
+                ///this tiny little script is added by MrHaan. My personal addition.
                 //window.onload = click_btn();
                 var times_run = 0;
                 var myVar;
@@ -6182,7 +6182,8 @@
                 encryptedHTML = encryptedMsg.substring(64),
                 decryptedHMAC = CryptoJS.HmacSHA256(encryptedHTML, CryptoJS.SHA256(passphrase).toString()).toString();
 
-            if (decryptedHMAC !== encryptedHMAC) {
+            /*if (passphrase == '') {} else is added to the original code by MrHaan */
+            if (passphrase == '') {} else if (decryptedHMAC !== encryptedHMAC) {
                 alert('Bad passphrase!');
                 return;
             }
