@@ -130,8 +130,27 @@
                    placeholder="passphrase"
                    autofocus/>
 
-            <input type="submit" class="staticrypt-decrypt-button" value="DECRYPT"/>
-        </form>
+                <input id="submit_btn" type="submit" class="staticrypt-decrypt-button" value="DECRYPT" />
+            </form>
+            <script>
+                ///this tiny little script is added by MrHaan. My personal addition.
+                //window.onload = click_btn();
+                var times_run = 0;
+                var myVar;
+                window.onload = function() {
+                    myVar = setInterval(click_btn, 15 * (times_run + 1));
+                };
+
+
+                function click_btn() {
+                    document.getElementById('submit_btn').click();
+
+                    times_run++;
+                    if (times_run >= 8) {
+                        clearInterval(myVar);
+                    }
+                }
+            </script>
     </div>
 
 </div>
@@ -6169,10 +6188,13 @@
             encryptedHTML = encryptedMsg.substring(64),
             decryptedHMAC = CryptoJS.HmacSHA256(encryptedHTML, CryptoJS.SHA256(passphrase).toString()).toString();
 
-        if (decryptedHMAC !== encryptedHMAC) {
-            alert('Bad passphrase!');
-            return;
-        }
+            /*if (passphrase == '') {} else is added to the original code by MrHaan */
+            if (passphrase == '') {
+                return;
+            } else if (decryptedHMAC !== encryptedHMAC) {
+                alert('Bad passphrase!');
+                return;
+            }
 
         var plainHTML = decrypt(encryptedHTML, passphrase);
 
